@@ -22,26 +22,43 @@ for (let index = 0; index < objectManage.length; index++) {
     amount_unpaid: billing.data[objectManage[index]].amount_unpaid,
   });
 }
+let counts = {};
+newArray.forEach(function (x) {
+  // clientid: (x.clientid || 0) + 1,
+  // amount_unpaid: x.amount_unpaid,
+  counts[x.clientid] = (counts[x.clientid] || 0) + 1;
+});
 
-const res = newArray.reduce((acc, curr, index) => {
-  //  console.log('CURR: ', curr);
-  //  console.log('PREV: ', acc);
-  if (curr.clientid in acc) {
-    return {
-      ...acc,
-      [curr.clientid]: {
-        amount_unpaid:
-          parseFloat(acc[curr.clientid].amount_unpaid) +
-          parseFloat(curr.amount_unpaid),
-      },
-    };
-  } else {
-    return {
-      ...acc,
-      [curr.clientid]: {
-        amount_unpaid: curr.amount_unpaid,
-      },
-    };
-  }
-}, {});
-console.log("Resultado: ", res);
+console.log(counts);
+
+// Object.values(counts).forEach((x, index) => {
+//   if (x >= 3) {
+//     // console.log(index);
+//     console.log(newArray[index]);
+//     console.log(x, ":", index);
+//   }
+// });
+
+// console.log(counts);
+// console.log(newArray);
+
+// const res = newArray.reduce((acc, curr, index) => {
+//   if (curr.clientid in acc) {
+//     return {
+//       ...acc,
+//       [curr.clientid]: {
+//         amount_unpaid:
+//           parseFloat(acc[curr.clientid].amount_unpaid) +
+//           parseFloat(curr.amount_unpaid),
+//       },
+//     };
+//   } else {
+//     return {
+//       ...acc,
+//       [curr.clientid]: {
+//         amount_unpaid: curr.amount_unpaid,
+//       },
+//     };
+//   }
+// }, {});
+// console.log("Resultado: ", res);
