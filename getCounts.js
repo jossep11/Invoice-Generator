@@ -28,6 +28,7 @@ let ClientesResidential = [];
 
 // ClientidR3T= Clientid Repeated 3 Times
 let ClientidR3T = [];
+let ClientNamesR3T = [];
 Object.keys(timesRepeatedClientID).forEach((element, index) => {
   if (Object.values(timesRepeatedClientID)[index] >= 3) {
     ObjectUsers.forEach((element2) => {
@@ -37,6 +38,7 @@ Object.keys(timesRepeatedClientID).forEach((element, index) => {
         element === Users.data[element2].clientid
       ) {
         ClientidR3T.push(element);
+        ClientNamesR3T.push(Users.data[element2].full_name);
       }
     });
   }
@@ -45,15 +47,16 @@ Object.keys(timesRepeatedClientID).forEach((element, index) => {
 // ClientidR3T.filter((element) => element === ClientesResidential);
 
 let total = [];
-ClientidR3T.forEach((element) => {
+ClientidR3T.forEach((element, index) => {
   let Clients = newArray.filter((el) => el.clientid === element);
   total.push(
     Clients.reduce((a, b) => parseFloat(a) + parseFloat(b.amount_unpaid), 0)
   );
   console.log(
     element,
-    Clients.reduce((a, b) => parseFloat(a) + parseFloat(b.amount_unpaid), 0)
+    Clients.reduce((a, b) => parseFloat(a) + parseFloat(b.amount_unpaid), 0),
+    ClientNamesR3T[index]
   );
 });
 
-// console.log(total.length);
+// console.log(total);
